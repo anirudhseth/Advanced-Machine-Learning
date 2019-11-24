@@ -17,7 +17,7 @@ def data():
 	noise = np.random.normal(0, 0.2, X.shape[0]).reshape(-1,1)
 	# noise = np.random.normal(0, 0.2, X.shape[0])
 	# T=np.sin(X)+np.cos(X)+noise
-	T=np.cos(X)
+	T=np.cos(X)**2
 	return X,T
 	
 def plotGP(noise,length_scale,no_of_samples):
@@ -31,8 +31,7 @@ def plotGP(noise,length_scale,no_of_samples):
 	for i in range(no_of_samples):
 		plt.plot(X[:],Z[i,:])
 	plt.title('Length Scale:'+str(length_scale))
-	
-	# plt.savefig('q10/q10_GP_'+str(length_scale)+'.png')
+	plt.savefig('q10/q10_GP_'+str(length_scale)+'.png')
 	plt.show()
 
 # https://peterroelants.github.io/posts/gaussian-process-tutorial/
@@ -53,22 +52,21 @@ def GP_noise(X, T, X_star, σ_noise):
 
 
 # # plot gp
-# for l in  length_scale:
+# for l in  [.01,.5,3,10]:
 # 	plotGP(noise,l,no_of_samples)
 
 X,T=data()
 # X_star=np.array([[-4.28318531]])
-X_star = np.linspace(-3*np.pi, 3*np.pi, 800).reshape(-1,1)
+X_star = np.linspace(-3*np.pi,3*np.pi, 500).reshape(-1,1)
 pos_mean,pos_cov=GP_noise(X,T,X_star,0)
-# pos_mean,pos_cov=computePosterior(X_star,X,T,1)
 op=np.random.multivariate_normal(mean=pos_mean.flatten(), cov=pos_cov, size=9)
 # plt.plot(X[:],op[:])
 # print(pos_cov)
 # print(pos_mean)
 plt.plot(X, T,'ro')
-plt.plot(X_star,np.cos(X_star), color = 'green')
-plt.plot(X_star,pos_mean, color = 'blue',linewidth=0.8)
-Z = np.random.multivariate_normal(np.reshape(pos_mean,(800,)),pos_cov,10)
+plt.plot(X_star,np.cos(X_star)**2, color = 'green',label='True Function')
+plt.plot(X_star,pos_mean, color = 'blue',linewidth=0.8,label='Posterior Mean')
+Z = np.random.multivariate_normal(np.reshape(pos_mean,(500,)),pos_cov,10)
 for i in range(10):
 	pb.plot(X_star[:],Z[i,:],linewidth=0.4)
 # print(pos_cov.diagonal())
@@ -76,5 +74,6 @@ pos_mean=pos_mean.flatten()
 upper = pos_mean + 2*np.sqrt(pos_cov.diagonal())
 lower = pos_mean - 2*np.sqrt(pos_cov.diagonal())
 ax = plt.gca()
+plt.legend()
 # print(pos_cov.diagonal().shape)
-ax.fill_between(np.linspace(-3*np.pi, 3*np.pi, 800), upper, lower, facecolor='yellow', interpolate=True, alpha=0.1)
+ax.fill_between(np.linspace(-3*np.pi, 3*np.pi, 500), upper, lower, facecolor='cyan', interpolate=True, alpha=0.2)
