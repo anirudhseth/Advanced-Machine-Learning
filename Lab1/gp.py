@@ -136,7 +136,7 @@ def plot5(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 
 
 for length_scale in [2]:
-	for σ_noise in [3]:
+	for σ_noise in [0,.3]:
 		X,T=data()
 		X_star = np.linspace(-8,8,1000).reshape(-1,1)
 		pos_mean,pos_cov=GP_noise(X,T,X_star,σ_noise,length_scale)
