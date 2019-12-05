@@ -18,7 +18,7 @@ def data():
 	noise = np.random.normal(0, 3, X.shape[0]).reshape(-1,1)
 	# noise = np.random.normal(0, 0.2, X.shape[0])
 	# T=np.sin(X)+np.cos(X)+noise
-	T=(2+(0.5*X-1)**2)*np.sin(3*X)+noise
+	T=(2+(0.5*X-1)**2)*np.sin(3*X)
 
 	return X,T
 	
@@ -57,8 +57,8 @@ def plot3(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 	plt.plot(X, T,'ro')
 	plt.plot(X_star,(2+(0.5*X_star-1)**2)*np.sin(3*X_star), linewidth=0.2,color = 'green',label='True Function')
 	plt.plot(X_star,pos_mean, color = 'blue',linewidth=0.8,label='GP Mean')
-	for i in range(5):
-		pb.plot(X_star[:],Z[i,:],linewidth=0.4)
+	# for i in range(5):
+	# 	pb.plot(X_star[:],Z[i,:],linewidth=0.4)
 	pos_mean=pos_mean.flatten()
 	upper = pos_mean + 2*np.sqrt(pos_cov.diagonal())
 	lower = pos_mean - 2*np.sqrt(pos_cov.diagonal())
@@ -68,7 +68,7 @@ def plot3(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 	plt.legend()
 	plt.title("Length Scale="+str(length_scale)+" and σ_noise="+str(σ_noise))
 	plt.xlim(-10,10)
-	plt.ylim(-18,20)
+	plt.ylim(-16,15)
 	ax.fill_between(np.linspace(-8, 8, 1000), upper, lower, facecolor='cyan', interpolate=True, alpha=0.2)
 def plot1(X,X_star,σ_noise,length_scale):
 	plt.figure()
@@ -78,7 +78,7 @@ def plot1(X,X_star,σ_noise,length_scale):
 	ax = plt.gca()
 	plt.xlabel('Labels')
 	plt.xlim(-10,10)
-	plt.ylim(-18,20)
+	plt.ylim(-6,8)
 
 	plt.title("Length Scale="+str(length_scale)+" and σ_noise="+str(σ_noise))
 	plt.ylabel('Predictions')
@@ -92,13 +92,13 @@ def plot2(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 	plt.xlabel('Labels')
 	plt.ylabel('Predictions')
 	plt.xlim(-10,10)
-	plt.ylim(-18,20)
+	plt.ylim(-16,15)
 	plt.title("Length Scale="+str(length_scale)+" and σ_noise="+str(σ_noise))
 	plt.legend()
 def plot4(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 	plt.figure()
 	plt.plot(X, T,'ro')
-	plt.plot(X_star,(2+(0.5*X_star-1)**2)*np.sin(3*X_star), color = 'green',label='True Function')
+	plt.plot(X_star,(2+(0.5*X_star-1)**2)*np.sin(3*X_star), linewidth=0.2,color = 'green',label='True Function')
 	plt.plot(X_star,pos_mean, color = 'blue',linewidth=0.8,label='GP Mean')
 	for i in range(10):
 		pb.plot(X_star[:],Z[i,:],linewidth=0.4)
@@ -107,7 +107,7 @@ def plot4(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 	lower = pos_mean - 2*np.sqrt(pos_cov.diagonal())
 	ax = plt.gca()
 	plt.xlim(-10,10)
-	plt.ylim(-18,20)
+	plt.ylim(-16,15)
 	plt.xlabel('Labels')
 	plt.ylabel('Predictions')
 	plt.title("Length Scale="+str(length_scale)+" and σ_noise="+str(σ_noise))
@@ -116,7 +116,7 @@ def plot4(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 def plot5(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 	plt.figure()
 	plt.plot(X, T,'ro')
-	plt.plot(X_star,(2+(0.5*X_star-1)**2)*np.sin(3*X_star), color = 'green',label='True Function')
+	plt.plot(X_star,(2+(0.5*X_star-1)**2)*np.sin(3*X_star), linewidth=0.2,color = 'green',label='True Function')
 	plt.plot(X_star,pos_mean, color = 'blue',linewidth=0.8,label='GP Mean')
 	for i in range(10):
 		pb.plot(X_star[:],Z[i,:],linewidth=0.4)
@@ -129,14 +129,14 @@ def plot5(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale):
 	plt.title("Length Scale="+str(length_scale)+" and σ_noise="+str(σ_noise))
 	plt.legend()
 	plt.xlim(-10,10)
-	plt.ylim(-18,20)
+	plt.ylim(-16,15)
 	ax.fill_between(np.linspace(-8, 8, 1000), upper, lower, facecolor='cyan', interpolate=True, alpha=0.2)
 
 
 
 
-for length_scale in [2]:
-	for σ_noise in [0,.3]:
+for length_scale in [1.2]:
+	for σ_noise in [0]:
 		X,T=data()
 		X_star = np.linspace(-8,8,1000).reshape(-1,1)
 		pos_mean,pos_cov=GP_noise(X,T,X_star,σ_noise,length_scale)
@@ -144,9 +144,9 @@ for length_scale in [2]:
 		Z = np.random.multivariate_normal(np.reshape(pos_mean,(1000,)),pos_cov,10)
 
 
-		# plotGP()
+		plotGP()
 		plot1(X,X_star,σ_noise,length_scale)
-		plot2(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale)
-		plot3(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale)
-		plot4(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale)
+		# plot2(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale)
+		# plot3(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale)
+		# plot4(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale)
 		# plot5(X,T,X_star,pos_mean,pos_cov,σ_noise,length_scale)

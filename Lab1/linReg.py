@@ -47,6 +47,7 @@ X_Label=np.arange(-1,1.01,.01)
 X_Label=np.stack((X_Label,np.ones(len(X_Label))),axis = 1)
 X_Label=np.flip(X_Label,axis=1)
 noise_mu=0
+noise_cov_matrix=[0.1,0.4,0.8]
 noise_cov=0.2
 noise = np.random.normal(noise_mu, noise_cov, X_Label.shape[0])
 noise=noise.reshape(-1,1)
@@ -60,35 +61,35 @@ w0=np.arange(-2,2,0.1)
 w1=np.arange(-2,2,0.1)
 title='P(w):Prior Distribution over W'
 plot2dGaussian(prior_mu,prior_cov,w0,w1,title)
+for noise_cov in noise_cov_matrix:
+	# compute posterior for n data point
+	N=[1,3,5,7,50,100]
+	for n in N:
+		posterior_mean,posterior_cov=calPosterior(prior_mu,prior_cov,noise_mu,noise_cov,X_Label,T,n)
+		w0=np.arange(-2,2,0.1)
+		w1=np.arange(-2,2,0.1)
+		title='Data Points Observed:'+str(n)+' Noise:'+str(noise_cov)
+		plot2dGaussian(posterior_mean,posterior_cov,w0,w1,title)
+		# draw 5 samples from posterior and plot function
+		for i in range(5):
+			w_samples = np.random.multivariate_normal(posterior_mean, posterior_cov, 5)
+		# print(w_samples)
+		p=np.arange(-2,2,.5)
+		plt.plot(p, 0.5*p-1.5,label="True Function")	
+		for i in range(5):
+			# Plot line based on sampled parameters
+			plt.plot(p, w_samples[i][1]*p + w_samples[i][0], color = "red", linestyle = "-", linewidth = 0.5)
+			plt.xlabel('x')
+			plt.ylabel('t')
+			# plt.axis('scaled')
+			# plt.axis('square')
+		plt.legend()
+		plt.title('Samples drawn from Posterior. Observed Data Points='+str(n)+' Noise:'+str(noise_cov))
+		plt.show()
 
-# compute posterior for n data point
-N=[1,3,5,7,50,100]
-for n in N:
-	posterior_mean,posterior_cov=calPosterior(prior_mu,prior_cov,noise_mu,noise_cov,X_Label,T,n)
-	w0=np.arange(-2,2,0.1)
-	w1=np.arange(-2,2,0.1)
-	title="Posterior Distribution after Observing",n,"point(s)"
-	plot2dGaussian(posterior_mean,posterior_cov,w0,w1,title)
-	# draw 5 samples from posterior and plot function
-	for i in range(5):
-		w_samples = np.random.multivariate_normal(posterior_mean, posterior_cov, 5)
-	# print(w_samples)
-	p=np.arange(-2,2,.5)
-	plt.plot(p, 0.5*p-1.5,label="True Function")	
-	for i in range(5):
-		# Plot line based on sampled parameters
-		plt.plot(p, w_samples[i][1]*p + w_samples[i][0], color = "red", linestyle = "-", linewidth = 0.5)
-		plt.xlabel('x')
-		plt.ylabel('t')
-		# plt.axis('scaled')
-		# plt.axis('square')
-	plt.legend()
-	plt.title('Samples drawn from Posterior')
-	plt.show()
-
-# # compute posterior
-# posterior_mean,posterior_cov=calPosterior(prior_mu,prior_cov,noise_mu,noise_cov,X_Label,T,100)
-# w0=np.arange(-2,2,0.1)
-# w1=np.arange(-2,2,0.1)
-# title='Poseterior after Observing one point'
-# plot2dGaussian(posterior_mean,posterior_cov,w0,w1,title)
+	# # compute posterior
+	# posterior_mean,posterior_cov=calPosterior(prior_mu,prior_cov,noise_mu,noise_cov,X_Label,T,100)
+	# w0=np.arange(-2,2,0.1)
+	# w1=np.arange(-2,2,0.1)
+	# title='Poseterior after Observing one point'
+	# plot2dGaussian(posterior_mean,posterior_cov,w0,w1,title)
