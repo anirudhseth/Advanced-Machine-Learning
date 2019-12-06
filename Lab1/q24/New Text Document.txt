@@ -1,0 +1,69 @@
+Mean for Model1
+[5.]
+Varaince for Model1
+[[83.31001431]]
+Mean for Model2
+[5. 5.]
+Varaince for Model2
+[[586.31849116 422.52686602]
+ [422.52686602 332.16197554]]
+Mean for Model3
+[5. 5. 5.]
+Varaince for Model3
+[[ 976.95731213  462.8702594   868.42291746]
+ [ 462.8702594   427.07164001  695.70679051]
+ [ 868.42291746  695.70679051 1417.52648956]]
+Samples used:1000
+***Sum of the Evidence***
+Model 0 :1.0
+Model 1 :0.9999999999999998
+Model 2 :0.9999999999999998
+Model 3 :1.0
+
+Best Performance by Model: 0
+Probability Mass is: 0.001953125
+O O O 
+O O O 
+O O O 
+
+Worst Performance by Model: 0
+Probability Mass is: 0.001953125
+O O O 
+O O O 
+O O O 
+
+Best Performance by Model: 1
+Probability Mass is: 0.07930848651736197
+O O X 
+O O X 
+O O X 
+
+Worst Performance by Model: 1
+Probability Mass is: 0.00014603138093043075
+O O O 
+O O O 
+O O O 
+
+Best Performance by Model: 2
+Probability Mass is: 0.1572548960672758
+O X X 
+O O X 
+O O X 
+
+Worst Performance by Model: 2
+Probability Mass is: 1.0317097819790048e-05
+O O O 
+O O O 
+O O O 
+
+Best Performance by Model: 3
+Probability Mass is: 0.14709905621127117
+X X X 
+X X X 
+X X X 
+
+Worst Performance by Model: 3
+Probability Mass is: 7.980638187473341e-08
+O O X 
+X O O 
+X O O 

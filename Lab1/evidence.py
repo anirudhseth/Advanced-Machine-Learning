@@ -100,6 +100,10 @@ def getThetaComplex(model,S):
         mu=np.ones(model)*5
         A = random.rand(model,model)
         cov = np.dot(A,A.transpose())*1000
+        print("Mean for Model"+str(model))
+        print(mu)
+        print("Varaince for Model"+str(model))
+        print(cov)
         return np.random.multivariate_normal(mu, cov, S)
 def computeEvidence(model,sample,data,theta):
     p=0
@@ -129,8 +133,8 @@ for m in range(4):
 sum_evid=np.sum(result,axis=0)
 print('Samples used:'+str(S))
 print('***Sum of the Evidence***')
-for i in range(len(sum_evid)):
-    print('Model '+str(i)+' :'+str(sum[i]))
+# for i in range(len(sum_evid)):
+#     print('Model '+str(i)+' :'+str(sum[i]))
 max = np.argmax(result,axis=0)
 min = np.argmin(result,axis=0)
 print()
