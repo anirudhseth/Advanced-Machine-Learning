@@ -1,0 +1,23 @@
+	Filename : data/q2_3_small_tree.pkl
+
+	Likelihood for Sample  0  is: 0.008753221441670067
+	Likelihood for Sample  1  is: 0.0383969250979291
+	Likelihood for Sample  2  is: 0.009129106859990061
+	Likelihood for Sample  3  is: 0.0214406975419561
+	Likelihood for Sample  4  is: 0.011945567814215127
+
+	Filename : data/q2_3_medium_tree.pkl
+
+	Likelihood for Sample  0  is: 8.66416414170832e-17
+	Likelihood for Sample  1  is: 5.394284454090606e-18
+	Likelihood for Sample  2  is: 8.892415333536359e-18
+	Likelihood for Sample  3  is: 1.1222302136292958e-18
+	Likelihood for Sample  4  is: 7.58934157249135e-19
+
+	Filename : data/q2_3_large_tree.pkl
+
+	Likelihood for Sample  0  is: 1.2296785012112113e-65
+	Likelihood for Sample  1  is: 1.4347770777980813e-63
+	Likelihood for Sample  2  is: 3.095491016149858e-66
+	Likelihood for Sample  3  is: 3.4231977224272667e-69
+	Likelihood for Sample  4  is: 4.822393947666207e-67
