@@ -1,2 +1,3 @@
-# DD2434_AdvancedMachineLearning
-DD2434_AdvancedMachineLearning
+# AdvancedMachineLearning
+
+
